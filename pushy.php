@@ -89,6 +89,26 @@ foreach ($list as $i => &$item)
 	if ($item->deeper)
 	{
 		echo '<ul class="pushy-submenu no-bullet">';
+		// Render the parent menu item.
+		echo '<li' . $class . '>';
+		// Reset $item->deeper so we don't get a chevron on the submenu
+		$item->deeper = 0;
+		
+		switch ($item->type) :
+			case 'separator':
+			case 'url':
+			case 'component':
+			case 'heading':
+				require JModuleHelper::getLayoutPath('mod_menu', 'pushy_' . $item->type);
+				break;
+
+			default:
+				require JModuleHelper::getLayoutPath('mod_menu', 'pushy_url');
+				break;
+		endswitch;
+		
+		echo '</li>';
+		// End parent menu item
 	}
 	elseif ($item->shallower)
 	{
@@ -102,4 +122,5 @@ foreach ($list as $i => &$item)
 		echo '</li>';
 	}
 }
-?></ul>
+?>
+</ul>
