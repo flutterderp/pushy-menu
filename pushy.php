@@ -72,18 +72,7 @@ foreach ($list as $i => &$item)
 	echo '<li' . $class . '>';
 
 	// Render the menu item.
-	switch ($item->type) :
-		case 'separator':
-		case 'url':
-		case 'component':
-		case 'heading':
-			require JModuleHelper::getLayoutPath('mod_menu', 'pushy_' . $item->type);
-			break;
-
-		default:
-			require JModuleHelper::getLayoutPath('mod_menu', 'pushy_url');
-			break;
-	endswitch;
+	renderItem($item->type, $item);
 
 	// The next item is deeper.
 	if ($item->deeper)
@@ -94,18 +83,7 @@ foreach ($list as $i => &$item)
 		// Reset $item->deeper so we don't get a chevron on the submenu
 		$item->deeper = 0;
 		
-		switch ($item->type) :
-			case 'separator':
-			case 'url':
-			case 'component':
-			case 'heading':
-				require JModuleHelper::getLayoutPath('mod_menu', 'pushy_' . $item->type);
-				break;
-
-			default:
-				require JModuleHelper::getLayoutPath('mod_menu', 'pushy_url');
-				break;
-		endswitch;
+		renderItem($item->type, $item);
 		
 		echo '</li>';
 		// End parent menu item
@@ -124,3 +102,25 @@ foreach ($list as $i => &$item)
 }
 ?>
 </ul>
+<?php
+/**
+ * Method for rendering a menu item
+ * 
+ * @param string	item_type	The menu item's type property
+ * @param object	item			The item object itself
+ */
+function renderItem($item_type, $item)
+{
+	switch ($item_type) :
+		case 'separator':
+		case 'url':
+		case 'component':
+		case 'heading':
+			require JModuleHelper::getLayoutPath('mod_menu', 'pushy_' . $item_type);
+			break;
+		
+		default:
+			require JModuleHelper::getLayoutPath('mod_menu', 'pushy_url');
+			break;
+	endswitch;
+}
