@@ -72,7 +72,7 @@ foreach ($list as $i => &$item)
 	echo '<li' . $class . '>';
 
 	// Render the menu item.
-	renderItem($item->type, $item);
+	renderItem($item->type, $item, $params);
 
 	// The next item is deeper.
 	if ($item->deeper)
@@ -83,7 +83,7 @@ foreach ($list as $i => &$item)
 		// Reset $item->deeper so we don't get a chevron on the submenu
 		$item->deeper = 0;
 		
-		renderItem($item->type, $item);
+		renderItem($item->type, $item, $params);
 		
 		echo '</li>';
 		// End parent menu item
@@ -109,7 +109,7 @@ foreach ($list as $i => &$item)
  * @param string	item_type	The menu item's type property
  * @param object	item			The item object itself
  */
-function renderItem($item_type, $item)
+function renderItem($item_type, $item, $params)
 {
 	switch ($item_type) :
 		case 'separator':
