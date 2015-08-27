@@ -22,6 +22,9 @@ defined('_JEXEC') or die;
 	}
 ?>>
 <?php
+// Uncomment to place a link to the home page in the offcanvas menu
+// echo '<li><a href="'.JUri::base().'">Home</a></li>';
+
 foreach ($list as $i => &$item)
 {
 	$class = 'item-' . $item->id;
