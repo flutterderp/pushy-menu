@@ -95,7 +95,8 @@ foreach ($list as $i => &$item)
 	{
 		// The next item is shallower.
 		echo '</li>';
-		echo str_repeat('</ul><div class="pushy-close-submenu"></div></li>', $item->level_diff);
+		echo '<li class="pushy-close-submenu"><a>Main Menu</a></li>';
+		echo str_repeat('</ul></li>', $item->level_diff);
 	}
 	else
 	{
